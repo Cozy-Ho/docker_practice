@@ -80,7 +80,7 @@ networks:
 
 >옵션 설명
 
-1. 첫 번째 서비스는 test Node.js 앱입니다. 조금 전에 빌드한 test 이미지로 실행된다.<br>8080 포트를 외부에 연결하고, 환경 변수로 SERVICE_PORTS로 작성했다.<br>deploy 옵션으로 20개의 복사본(replicas)을 만들고 업데이트 설정과 재시작 설정을 추가했다.<br>파일의 마지막에 작성한 network인 web 네트워크에 모든 컨테이너를 연결해둔 것이 가장 중요한 포인트.
+1. 첫 번째 서비스는 test Node.js 앱 이다. 조금 전에 빌드한 test 이미지로 실행된다.<br>8080 포트를 외부에 연결하고, 환경 변수로 SERVICE_PORTS로 작성했다.<br>deploy 옵션으로 20개의 복사본(replicas)을 만들고 업데이트 설정과 재시작 설정을 추가했다.<br>파일의 마지막에 작성한 network인 web 네트워크에 모든 컨테이너를 연결해둔 것이 가장 중요한 포인트.
 
 2. 두 번째 서비스는 Docker 팀의 haproxy 이미지로 만든 HAProxy이다.<br>이미 Docker 팀에서 만들어 두었기 때문에 우리는 이미지를 빌드할 필요 없이 가져다 사용하면 된다.<br>depends_on 옵션으로 test 서비스가 부팅이 완료된 이후에 실행을 시작한다.<br>또한 volumes 옵션으로 docker.sock 파일을 공유한다.<br>HAProxy 컨테이너가 네트워크에 이미 있거나 새롭게 들어오는 컨테이너들을 찾고 확인할 수 있어야 하기 때문. 80 포트는 외부에 연결하고 web 네트워크에도 연결했다.<br>마지막으로 deploy 설정에서 manager node에서 항상 실행하도록 설정한다.<br>이건 Docker Swarm의 설정으로, node가 여러 개라면 volumes 옵션 때문에 필요하다.
 
